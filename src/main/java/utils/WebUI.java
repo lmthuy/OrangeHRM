@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -21,7 +22,7 @@ import java.util.List;
 public class WebUI {
     private final static int Timeout = 0;
     private final static double Step_Time = 1;
-    private final static int Page_Load_Timeout = 6;
+    private final static int Page_Load_Timeout = 5;
 
     public static void sleep(double second) {
         try {
@@ -79,7 +80,46 @@ public class WebUI {
             return false;
         }
     }
-
+    public static boolean pressQ() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_Q);
+            robot.keyRelease(KeyEvent.VK_Q);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static boolean pressT() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_T);
+            robot.keyRelease(KeyEvent.VK_T);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static boolean pressM() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_M);
+            robot.keyRelease(KeyEvent.VK_M);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static boolean pressF() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_F);
+            robot.keyRelease(KeyEvent.VK_F);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 
     public static WebElement getWebElement(By by) {
@@ -172,9 +212,22 @@ public class WebUI {
             System.out.println("checkElementExist: " + false + " --- " + by);
             return false;
         }
-
     }
 
+    public static boolean moveToElement(By toElement) {
+        try {
+            Actions action = new Actions(DriverManager.getDriver());
+            action.moveToElement(getWebElement(toElement)).release(getWebElement(toElement)).build().perform();
+            return true;
+        } catch (Exception e) {
+            Log.info(e.getMessage());
+            return false;
+        }
+    }
+    public static void scrollToElement(By element) {
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(fail);", getWebElement(element));
+    }
 
 
 }

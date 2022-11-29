@@ -25,18 +25,5 @@ public class LoginTest extends BaseTest {
         loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
     }
 
-    @Test(priority = 1)
-    public void testForgetPass() {
-        loginPage.forgetPassWord("Admin");
-    }
 
-    @Test(priority = 2)
-    public void testLogInWithInvalidPass() {
-        loginPage.logInWithInvalidInfor("Admin", "123456");
-    }
-
-    @Test(priority = 3)
-    public void testLogInWithInValidUserName() {
-        loginPage.logInWithInvalidInfor("Admin254", "admin123");
-    }
 }

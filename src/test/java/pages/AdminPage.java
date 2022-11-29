@@ -1,5 +1,6 @@
 package pages;
 
+import DataTest.ConstantData;
 import com.sun.source.tree.AssertTree;
 import driver.DriverManager;
 import org.openqa.selenium.By;
@@ -41,7 +42,10 @@ public class AdminPage extends CommonPage {
     By status = By.xpath("(//div[contains(text(),'-- Select --')])[2]");
     By inputPassword = By.xpath("(//input[@type='password'])[1]");
     By confirmPassword = By.xpath("(//input[@type='password'])[2]");
-    By nametoFill = By.xpath(" (//label[normalize-space()='Employee Name']/parent::div)/following-sibling::div[normalize-space()='Kevin Mathews']");
+    By profilePicture = By.xpath("//img[@alt='profile picture']");
+    By buttonLogout = By.xpath("//a[normalize-space()='Logout']");
+
+
 
 
     public void addJobTitle() {
@@ -152,27 +156,27 @@ public class AdminPage extends CommonPage {
         WebUI.clickElement(buttonAdd);
         WebUI.sleep(5);
 
-        WebUI.setText(inputEmployeeName,"Kevin Mathews");
+        WebUI.setText(inputEmployeeName, "Kevin Mathews");
         WebUI.sleep(5);
-        WebElement selectEmployeeName  = DriverManager.getDriver().findElement(inputEmployeeName);
+        WebElement selectEmployeeName = DriverManager.getDriver().findElement(inputEmployeeName);
         selectEmployeeName.sendKeys(Keys.ARROW_DOWN);
-        selectEmployeeName.sendKeys(Keys.LEFT);
-        WebUI.sleep(2);
+        WebUI.clickElement(By.xpath("(//div[@role='listbox'])[1]"));
+        WebUI.sleep(5);
 
         WebElement selectStatus = DriverManager.getDriver().findElement(status);
         selectStatus.sendKeys(Keys.ARROW_DOWN);
+        WebUI.clickElement(By.xpath("(//div[@role='listbox'])[1]"));
+        WebUI.sleep(5);
         WebElement toSelectRole = DriverManager.getDriver().findElement(userRole);
         toSelectRole.sendKeys(Keys.ARROW_DOWN);
-        toSelectRole.sendKeys(Keys.ARROW_DOWN);
+        WebUI.clickElement(By.xpath("(//div[@role='listbox'])[1]"));
         WebUI.sleep(5);
-        WebUI.setText(inputInfor,"Kevin01");
-        WebUI.setText(inputPassword,"Admin@123");
-        WebUI.setText(confirmPassword,"Admin@123");
-      //  WebUI.clickElement(buttonSave);
-      // WebUI.sleep(10);
-     //  boolean checkText = WebUI.checkElementExist(By.xpath("//div[contains(text(),'Kevin01')]"));
-     //WebUI.verifyTrue(checkText, "Fail to add New User");
-      //WebUI.sleep(5);
-
+        WebUI.setText(inputInfor, ConstantData.NEW_USERNAME);
+        WebUI.setText(inputPassword, ConstantData.NEW_PASSWORD);
+        WebUI.setText(confirmPassword, ConstantData.NEW_PASSWORD);
+        WebUI.clickElement(buttonSave);
+        WebUI.sleep(8);
+        WebUI.clickElement(profilePicture);
+        WebUI.clickElement(buttonLogout);
     }
 }

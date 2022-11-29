@@ -5,4 +5,7 @@ public class ConstantData {
     public final static String PASSWORD = "admin123";
     public final static String FIRSTNAME = "Nguyen";
     public final static String LASTNAME = "Lam";
+    public final static String NEW_USERNAME = "Kevin07";
+    public final static String NEW_PASSWORD= "Admin@123";
+
 }

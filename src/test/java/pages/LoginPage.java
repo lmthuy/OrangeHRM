@@ -29,24 +29,24 @@ public class LoginPage {
 
     public LoginPage forgetPassWord(String username) {
         WebUI.openURL("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        WebUI.waitForPageLoaded();
+        WebUI.sleep(5);
         WebUI.clickElement(forgetPassword);
         WebUI.sleep(4);
         WebUI.setText(inputUsername, username);
         WebUI.clickElement(buttonSubmit);
         WebUI.sleep(3);
         WebUI.verifyEquals(WebUI.getElementText(notifyLoginSuccess), "Reset Password link sent successfully");
-        WebUI.sleep(5);
+        WebUI.sleep(10);
         return new LoginPage();
     }
 
     public LoginPage logInWithInvalidInfor(String username, String password) {
         WebUI.openURL("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        WebUI.waitForPageLoaded();
+       WebUI.sleep(5);
         WebUI.setText(inputUsername, username);
         WebUI.setText(inputPassword, password);
         WebUI.clickElement(buttonSubmit);
-        WebUI.sleep(4);
+        WebUI.sleep(7);
         WebUI.verifyEquals(WebUI.getElementText(notifyLoginFail), "Invalid credentials");
         return new LoginPage();
     }

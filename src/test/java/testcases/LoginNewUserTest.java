@@ -24,13 +24,23 @@ public class LoginNewUserTest extends BaseTest {
         adminPage = new AdminPage();
         pimPage = new PIMPage();
     }
-    @Test
+    @Test(priority = 0)
     public void testLoginNewUser(){
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         WebUI.sleep(5);
         adminPage.addNewUser();
+        dashboardPage = loginPage.logIn(ConstantData.NEW_USERNAME,ConstantData.NEW_PASSWORD);
+    }
 
 
+    @Test(priority = 1)
+    public void testLogInWithInvalidPass() {
+        loginPage.logInWithInvalidInfor(ConstantData.NEW_USERNAME, "123456");
+    }
+
+    @Test(priority = 2)
+    public void testLogInWithInValidUserName() {
+        loginPage.logInWithInvalidInfor("Kevin123",ConstantData.NEW_PASSWORD );
     }
 
 }

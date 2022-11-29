@@ -23,6 +23,7 @@ public class PIMTest extends BaseTest {
     @Test
     public void testAddNewEmployee(){
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
+        WebUI.waitForPageLoaded();
         pimPage = commonPage.openPIMPage();
         WebUI.sleep(5);
         pimPage.addEmployee();
