@@ -110,6 +110,26 @@ public class WebUI {
             return false;
         }
     }
+    public static boolean pressP() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_P);
+            robot.keyRelease(KeyEvent.VK_P);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static boolean pressE() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_E);
+            robot.keyRelease(KeyEvent.VK_E);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     public static boolean pressF() {
         try {
             Robot robot = new Robot();

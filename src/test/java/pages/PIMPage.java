@@ -9,7 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import utils.Log;
-import utils.WebUI;
+
+import static utils.WebUI.*;
 
 import javax.print.DocFlavor;
 
@@ -30,6 +31,7 @@ public class PIMPage extends CommonPage {
     By inputDateOfBirth = By.xpath("(//input[@placeholder='yyyy-mm-dd'])[2]");
     By checkLastName = By.xpath("(//div[contains(text(),'Lam')])[1]");
     By checkFirstName = By.xpath("(//div[contains(text(),'Nguyen')])[1]");
+    By checkJobTitle = By.xpath("(//div[contains(text(),'QA Engineer')])[1]");
     By editJob = By.xpath("//a[normalize-space()='Job']");
     By inputJoinedDate = By.xpath("//input[@placeholder='yyyy-mm-dd']");
     By inputJobTitle = By.xpath("(//div[contains(text(),'-- Select --')])[1]");
@@ -38,80 +40,97 @@ public class PIMPage extends CommonPage {
     By inputLocation = By.xpath("(//div[contains(text(),'-- Select --')])[4]");
     By inputEmployeeStatus = By.xpath("(//div[contains(text(),'-- Select --')])[5]");
     By inputEmployeeID = By.xpath("(//input[@class='oxd-input oxd-input--active'])[2]");
+    By ID = By.xpath("//div[contains(text(),'0456')]");
 
+    By sortID = By.xpath("(//div[@role='columnheader'])[2]/child::div[1]");
+    By selectDecending = By.xpath("(//span[@class='oxd-text oxd-text--span'][normalize-space()='Decending'])[1]");
 
     public void addEmployee() {
-        WebUI.clickElement(buttonAddEmployee);
-        WebUI.sleep(5);
-        WebUI.setText(inputFirstName, ConstantData.FIRSTNAME);
-        WebUI.setText(inputLastName, ConstantData.LASTNAME);
-        WebUI.clickElement(buttonSave);
-        WebUI.sleep(7);
+        clickElement(buttonAddEmployee);
+        sleep(5);
+        setText(inputFirstName, ConstantData.FIRSTNAME);
+        setText(inputLastName, ConstantData.LASTNAME);
+        WebElement toEdit = DriverManager.getDriver().findElement(inputEmployeeID);
+        toEdit.sendKeys(Keys.CONTROL + "a");
+        toEdit.sendKeys(Keys.DELETE);
+        toEdit.sendKeys("0456");
+        clickElement(buttonSave);
+        sleep(7);
         //Personal Details
-        WebUI.clickElement(inputJobTitle);
-        WebUI.sleep(5);
-        WebUI.setText(inputDriverLicense, "451227846");
-        WebUI.setText(inputLicenseExpiryDate, "2025-10-10");
-        WebUI.setText(inputSSNNumber, "023647863");
-        WebUI.setText(inputSinNumber, "03648711");
-        WebUI.clickElement(nationality);
-        WebUI.sleep(7);
+        clickElement(inputJobTitle);
+        sleep(3);
+
+        setText(inputLicenseExpiryDate, "2025-10-10");
+        setText(inputSSNNumber, "023647863");
+        setText(inputSinNumber, "03648711");
+        clickElement(nationality);
+        sleep(7);
         WebElement toSelectNationality = DriverManager.getDriver().findElement(nationality);
-        WebUI.pressV();
-        WebUI.sleep(2);
+        pressV();
+        sleep(2);
         toSelectNationality.sendKeys(Keys.ARROW_DOWN);
         toSelectNationality.sendKeys(Keys.ENTER);
 
-        WebUI.clickElement(martialStatus);
-        WebUI.sleep(2);
-        WebUI.pressM();
-        WebUI.setText(inputDateOfBirth, "1989-10-10");
-        WebUI.clickElement(selectGender);
-        WebUI.clickElement(By.xpath("(//button[@type='submit'][normalize-space()='Save'])[1]"));
+        clickElement(martialStatus);
+        sleep(2);
+        pressM();
+        setText(inputDateOfBirth, "1989-10-10");
+        clickElement(selectGender);
+        clickElement(By.xpath("(//button[@type='submit'][normalize-space()='Save'])[1]"));
 
         //Job
 
-        WebUI.clickElement(editJob);
-        WebUI.sleep(5);
-        WebUI.setText(inputJoinedDate, "2022-12-08");
+        clickElement(editJob);
+        sleep(5);
+        setText(inputJoinedDate, "2022-12-08");
 
-        WebUI.waitForPageLoaded();
-        WebUI.clickElement(inputJobCategory);
-        WebUI.pressT();
-        WebUI.sleep(2);
-        WebUI.clickElement(By.xpath("(//i)[9]"));
-        WebUI.sleep(2);
-      //  WebElement toSelectSubUnit = DriverManager.getDriver().findElement(By.xpath("(//i)[9]"));
-        WebUI.pressQ();
-        WebUI.sleep(3);
+        waitForPageLoaded();
+        clickElement(inputJobCategory);
+        pressT();
+        sleep(2);
+        clickElement(By.xpath("(//i)[9]"));
+        sleep(2);
+        pressE();
+        sleep(3);
 
-        WebUI.waitForPageLoaded();
+        waitForPageLoaded();
 
-        WebUI.clickElement(By.xpath("(//i)[10]"));
-        WebUI.sleep(2);
-       // WebElement toSelectLocation = DriverManager.getDriver().findElement(By.xpath("(//i)[10]"));
-        WebUI.pressT();
-        WebUI.sleep(3);
-;
+        clickElement(By.xpath("(//i)[10]"));
+        sleep(2);
+        pressT();
+        sleep(2);
 
-        WebUI.waitForPageLoaded();
-        WebUI.clickElement(By.xpath("(//i)[7]"));
-        WebUI.pressQ();
-        WebUI.sleep(2);
+        waitForPageLoaded();
+        clickElement(By.xpath("(//i)[7]"));
+        pressQ();
+        pressENTER();
+
+        clickElement(By.xpath("(//i)[11]"));
+        pressP();
+        sleep(5);
+        pressENTER();
+        clickElement(buttonSave);
+
+        openURL("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
+        sleep(6);
+
+        clickElement(sortID);
+        sleep(2);
+        clickElement(selectDecending);
+        sleep(2);
+        WebElement getID = DriverManager.getDriver().findElement(ID);
+        String actualID = getID.getText();
+        sleep(2);
+        verifyEquals(actualID,"0456");
+
+        boolean verifyFirstName = checkElementExist(checkFirstName);
+        verifyTrue(verifyFirstName, "Fail to add new employee");
+        sleep(3);
+        boolean verifyLastName = checkElementExist(checkLastName);
+        verifyTrue(verifyLastName, "Fail to add new employee");
 
 
-        WebUI.clickElement(buttonSave);
 
-        WebUI.openURL("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
-        WebUI.sleep(7);
-        WebElement element = DriverManager.getDriver().findElement(checkFirstName);
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
-        js.executeScript("arguments[0].scrollIntoView();", element);
-        WebUI.sleep(3);
-        boolean verifyFirstName = WebUI.checkElementExist(checkFirstName);
-        WebUI.verifyTrue(verifyFirstName, "Fail to add new employee");
-        WebUI.sleep(3);
-        boolean verifyLastName = WebUI.checkElementExist(checkLastName);
-        WebUI.verifyTrue(verifyLastName, "Fail to add new employee");
+
     }
 }

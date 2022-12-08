@@ -26,13 +26,10 @@ public class CaptureHelper extends ScreenRecorder {
     public static ScreenRecorder screenRecorder;
     public String name;
 
-    //Hàm xây dựng
     public CaptureHelper(GraphicsConfiguration cfg, Rectangle captureArea, Format fileFormat, Format screenFormat, Format mouseFormat, Format audioFormat, File movieFolder, String name) throws IOException, AWTException {
         super(cfg, captureArea, fileFormat, screenFormat, mouseFormat, audioFormat, movieFolder);
         this.name = name;
     }
-
-    //Hàm này bắt buộc để ghi đè custom lại hàm trong thư viên viết sẵn
     @Override
     protected File createMovieFile(Format fileFormat) {
 

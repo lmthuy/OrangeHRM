@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Project Orange HRM" verbose="1">
+
+    <test name="PIM Test">
+        <parameter name="browser" value="firefox"></parameter>
+        <classes>
+            <class name="testcases.PIMTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,7 +1,11 @@
 package pages;
 
+import DataTest.ConstantData;
 import org.openqa.selenium.By;
 import utils.WebUI;
+
+
+import static utils.WebUI.*;
 
 public class LoginPage {
     public LoginPage() {
@@ -17,37 +21,37 @@ public class LoginPage {
 
 
     public DashboardPage logIn(String username, String password) {
-        WebUI.openURL("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        WebUI.sleep(3);
-        WebUI.setText(inputUsername, username);
-        WebUI.setText(inputPassword, password);
-        WebUI.clickElement(buttonSubmit);
-        WebUI.sleep(6);
-        WebUI.verifyEquals(WebUI.getElementText(header_Dashboard), "Dashboard");
+        openURL(ConstantData.URL);
+        sleep(3);
+        setText(inputUsername, username);
+        setText(inputPassword, password);
+        clickElement(buttonSubmit);
+        sleep(6);
+        verifyEquals(getElementText(header_Dashboard), "Dashboard");
         return new DashboardPage();
     }
 
     public LoginPage forgetPassWord(String username) {
-        WebUI.openURL("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        WebUI.sleep(5);
-        WebUI.clickElement(forgetPassword);
-        WebUI.sleep(4);
-        WebUI.setText(inputUsername, username);
-        WebUI.clickElement(buttonSubmit);
-        WebUI.sleep(3);
-        WebUI.verifyEquals(WebUI.getElementText(notifyLoginSuccess), "Reset Password link sent successfully");
-        WebUI.sleep(10);
+        openURL(ConstantData.URL);
+        sleep(5);
+        clickElement(forgetPassword);
+        sleep(4);
+        setText(inputUsername, username);
+        clickElement(buttonSubmit);
+        sleep(3);
+        verifyEquals(getElementText(notifyLoginSuccess), "Reset Password link sent successfully");
+        sleep(10);
         return new LoginPage();
     }
 
     public LoginPage logInWithInvalidInfor(String username, String password) {
-        WebUI.openURL("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-       WebUI.sleep(5);
-        WebUI.setText(inputUsername, username);
-        WebUI.setText(inputPassword, password);
-        WebUI.clickElement(buttonSubmit);
-        WebUI.sleep(7);
-        WebUI.verifyEquals(WebUI.getElementText(notifyLoginFail), "Invalid credentials");
+        openURL(ConstantData.URL);
+        sleep(5);
+        setText(inputUsername, username);
+        setText(inputPassword, password);
+        clickElement(buttonSubmit);
+        sleep(7);
+        verifyEquals(getElementText(notifyLoginFail), "Invalid credentials");
         return new LoginPage();
     }
 

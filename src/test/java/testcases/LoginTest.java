@@ -2,11 +2,21 @@ package testcases;
 
 import DataTest.ConstantData;
 import common.BaseTest;
+import dataprovider.DataProviderFactory;
+import dataprovider.DataProviderManager;
+import helpers.ExcelHelpers;
+import helpers.Helpers;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.DashboardPage;
 import pages.LoginPage;
+
+import static utils.WebUI.*;
+
+import java.io.StringReader;
+import java.util.Hashtable;
 
 public class LoginTest extends BaseTest {
     public LoginPage loginPage;
@@ -20,10 +30,13 @@ public class LoginTest extends BaseTest {
         dashboardPage = new DashboardPage();
     }
 
-    @Test(priority = 0)
-    public void testLogInSuccess() {
-        loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
+    @Test
+    public void testLogin() {
+        dashboardPage =  loginPage.logIn(ConstantData.USERNAME,ConstantData.PASSWORD);
+        sleep(5);
     }
-
-
 }
+
+
+
+

@@ -1,7 +1,8 @@
 package pages;
 
 import org.openqa.selenium.By;
-import utils.WebUI;
+
+import static utils.WebUI.*;
 
 public class CommonPage {
     public CommonPage() {
@@ -18,17 +19,18 @@ public class CommonPage {
 
 
     public LoginPage logOut() {
-        WebUI.clickElement(buttonAvt);
-        WebUI.clickElement(buttonLogOut);
+        clickElement(buttonAvt);
+        clickElement(buttonLogOut);
         return new LoginPage();
     }
 
     public AdminPage openAdminPage() {
-        WebUI.clickElement(menuAdmin);
+        clickElement(menuAdmin);
         return new AdminPage();
     }
-    public PIMPage openPIMPage(){
-        WebUI.clickElement(menuPIM);
+
+    public PIMPage openPIMPage() {
+        clickElement(menuPIM);
         return new PIMPage();
     }
 
@@ -38,8 +40,9 @@ public class CommonPage {
         }
         return adminPage;
     }
-    public PIMPage getPimPage(){
-        if(pimPage == null){
+
+    public PIMPage getPimPage() {
+        if (pimPage == null) {
             pimPage = new PIMPage();
         }
         return pimPage;
