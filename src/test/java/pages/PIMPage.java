@@ -53,7 +53,7 @@ public class PIMPage extends CommonPage {
         WebElement toEdit = DriverManager.getDriver().findElement(inputEmployeeID);
         toEdit.sendKeys(Keys.CONTROL + "a");
         toEdit.sendKeys(Keys.DELETE);
-        toEdit.sendKeys("0456");
+        toEdit.sendKeys("9982");
         clickElement(buttonSave);
         sleep(7);
         //Personal Details

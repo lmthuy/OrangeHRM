@@ -162,7 +162,7 @@ public class AdminPage extends CommonPage {
         clickElement(buttonAdd);
         sleep(5);
 
-        setText(inputEmployeeName, "Kevin Mathews");
+        setText(inputEmployeeName, ConstantData.ADMIN_NAME);
         sleep(5);
         WebElement selectEmployeeName = DriverManager.getDriver().findElement(inputEmployeeName);
         selectEmployeeName.sendKeys(Keys.ARROW_DOWN);
