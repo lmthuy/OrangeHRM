@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Orange HRM Project" verbose="1">
+<suite name="Project Orange HRM" verbose="1">
 
-    <test name="Admin Test">
-        <parameter name="browser" value="chrome"></parameter>
+    <test name="Login New User Test">
+        <parameter name="browser" value="edge"></parameter>
         <classes>
-            <class name="testcases.AdminTest" />
+            <class name="testcases.AdminTest"/>
         </classes>
     </test>
+
 </suite>

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.LoginPage;
 import pages.PIMPage;
-import utils.WebUI;
+import static utils.WebUI.*;
 
 public class PIMTest extends BaseTest {
     public LoginPage loginPage;
@@ -23,9 +23,9 @@ public class PIMTest extends BaseTest {
     @Test
     public void testAddNewEmployee(){
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
-        WebUI.waitForPageLoaded();
+        waitForPageLoaded();
         pimPage = commonPage.openPIMPage();
-        WebUI.sleep(5);
+        sleep(5);
         pimPage.addEmployee();
     }
 }

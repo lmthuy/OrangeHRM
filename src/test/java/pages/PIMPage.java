@@ -42,6 +42,8 @@ public class PIMPage extends CommonPage {
     By inputEmployeeID = By.xpath("(//input[@class='oxd-input oxd-input--active'])[2]");
     By ID = By.xpath("//div[contains(text(),'0456')]");
 
+    By jobTitle = By.xpath("(//div[contains(text(),'QA Engineer')])[1]");
+
     By sortID = By.xpath("(//div[@role='columnheader'])[2]/child::div[1]");
     By selectDecending = By.xpath("(//span[@class='oxd-text oxd-text--span'][normalize-space()='Decending'])[1]");
 
@@ -53,7 +55,7 @@ public class PIMPage extends CommonPage {
         WebElement toEdit = DriverManager.getDriver().findElement(inputEmployeeID);
         toEdit.sendKeys(Keys.CONTROL + "a");
         toEdit.sendKeys(Keys.DELETE);
-        toEdit.sendKeys("9982");
+        toEdit.sendKeys(ConstantData.ID);
         clickElement(buttonSave);
         sleep(7);
         //Personal Details
@@ -118,11 +120,10 @@ public class PIMPage extends CommonPage {
         sleep(2);
         clickElement(selectDecending);
         sleep(2);
-        WebElement getID = DriverManager.getDriver().findElement(ID);
-        String actualID = getID.getText();
-        sleep(2);
-        verifyEquals(actualID,"0456");
 
+        boolean verifyJobTitle = checkElementExist(jobTitle);
+        verifyTrue(verifyJobTitle,"Fail to add new employee");
+        sleep(2);
         boolean verifyFirstName = checkElementExist(checkFirstName);
         verifyTrue(verifyFirstName, "Fail to add new employee");
         sleep(3);

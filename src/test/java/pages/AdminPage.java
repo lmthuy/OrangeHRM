@@ -11,6 +11,7 @@ import org.testng.Assert;
 import utils.Log;
 import utils.WebUI;
 
+import static org.testng.Assert.assertTrue;
 import static utils.WebUI.*;
 
 import java.awt.*;
@@ -67,7 +68,9 @@ public class AdminPage extends CommonPage {
     }
 
     public void addJobCategory() {
+        sleep(3);
         clickElement(sectionJob);
+        sleep(3);
         clickElement(selectJobCategories);
         sleep(5);
         clickElement(buttonAdd);
@@ -83,6 +86,7 @@ public class AdminPage extends CommonPage {
     public void addEmploymentStatus() {
         sleep(3);
         clickElement(sectionJob);
+        sleep(3);
         clickElement(selectEmploymentStatus);
         sleep(5);
         clickElement(buttonAdd);
@@ -98,24 +102,29 @@ public class AdminPage extends CommonPage {
     public void deleteEmployeeStatus() {
         sleep(3);
         clickElement(sectionJob);
+        sleep(3);
         clickElement(selectEmploymentStatus);
         sleep(5);
         clickElement(buttonDelete);
-        sleep(4);
+        sleep(1);
         clickElement(buttonYesDelete);
         sleep(1);
-        String actualText = getElementText(messageSuccess);
-        sleep(1);
-        // System.out.println(actualText);
-        String expectedText = "Successfully Deleted";
+        waitForPageLoaded();
+        assertTrue(DriverManager.getDriver().findElements(By.xpath("//div[contains(text(),'Part-Time Inrternship')]")).isEmpty());
+        sleep(6);
+
+       /* String actualText = getElementText(messageSuccess);
+        sleep(0.5);
+        String expectedText = "Successfully Updated";
         Assert.assertTrue(actualText.contains(expectedText));
         Log.info("Verify equals: " + actualText + " and " + expectedText);
-        sleep(5);
+       */
     }
 
     public void editEmployeeStatus() {
         sleep(3);
         clickElement(sectionJob);
+        sleep(3);
         clickElement(selectEmploymentStatus);
         sleep(5);
         clickElement(buttonEdit);
@@ -125,17 +134,16 @@ public class AdminPage extends CommonPage {
         toEdit.sendKeys(Keys.DELETE);
         toEdit.sendKeys("Staff");
         clickElement(buttonSave);
-        sleep(1);
-        String actualText = getElementText(messageSuccess);
-        sleep(0.5);
-        // System.out.println(actualText);
-        String expectedText = "Successfully Updated";
-        Assert.assertTrue(actualText.contains(expectedText));
-        Log.info("Verify equals: " + actualText + " and " + expectedText);
+        sleep(7);
+        boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Staff')]"));
+        verifyTrue(checkText, "Fail to edit Employee Status");
+        sleep(5);
     }
 
     public void adddLocation() {
+        sleep(3);
         clickElement(sectionOrganization);
+        sleep(3);
         clickElement(selectLocation);
         sleep(5);
         clickElement(buttonAdd);
@@ -162,7 +170,13 @@ public class AdminPage extends CommonPage {
         clickElement(buttonAdd);
         sleep(5);
 
-        setText(inputEmployeeName, ConstantData.ADMIN_NAME);
+        WebElement getAdminName = DriverManager.getDriver().findElement(By.xpath("//p[@class='oxd-userdropdown-name']"));
+        String adminName = getAdminName.getText();
+        System.out.println(adminName);
+        setText(inputEmployeeName, adminName);
+
+
+      //  setText(inputEmployeeName, ConstantData.ADMIN_NAME);
         sleep(5);
         WebElement selectEmployeeName = DriverManager.getDriver().findElement(inputEmployeeName);
         selectEmployeeName.sendKeys(Keys.ARROW_DOWN);
@@ -183,6 +197,7 @@ public class AdminPage extends CommonPage {
         clickElement(buttonSave);
         sleep(8);
         clickElement(profilePicture);
+        sleep(5);
         clickElement(buttonLogout);
     }
 }
