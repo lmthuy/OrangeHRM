@@ -1,5 +1,6 @@
 # OrangeHRM
 Here is a final project of automation testing course. This project uses demo web: https://opensource-demo.orangehrmlive.com/
+Because there are some accesion at the same time with this website, language will change into others. Please notify me when this issuue occurs.
 
 Testing the following features:
 
