@@ -86,27 +86,26 @@ public class AdminPage extends CommonPage {
     public void addEmploymentStatus() {
         waitForPageLoaded();
         clickElement(sectionJob);
-        ;
         clickElement(selectEmploymentStatus);
-        // sleep(5);
+      
         clickElement(buttonAdd);
-        // sleep(5);
+      
         waitForPageLoaded();
         setText(inputInfor, "Full-Time Internship");
         clickElement(buttonSave);
         waitForPageLoaded();
-        //sleep(10);
+     
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Full-Time Internship')]"));
         verifyTrue(checkText, "Fail to add Employee Status");
         waitForPageLoaded();
-        //sleep(5);
+       
     }
 
     public void deleteEmployeeStatus() {
         waitForPageLoaded();
         clickElement(sectionJob);
         clickElement(selectEmploymentStatus);
-        ;
+        
         clickElement(buttonDelete);
         sleep(1);
         clickElement(buttonYesDelete);
@@ -123,16 +122,12 @@ public class AdminPage extends CommonPage {
         clickElement(buttonEdit);
         waitForPageLoaded();
         waitForElementVisible(inputInfor);
-        WebElement toEdit = DriverManager.getDriver().findElement(inputInfor);
-        toEdit.sendKeys(Keys.CONTROL + "a");
-        sleep(1);
-        toEdit.sendKeys(Keys.DELETE);
-        sleep(1);
-        toEdit.sendKeys("Staff");
-        sleep(1);
+
+        setText(inputInfor, " managed by Mr.Wu");
+        sleep(2);
         clickElement(buttonSave);
         waitForPageLoaded();
-        boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Staff')]"));
+        boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Mr.Wu')]"));
         verifyTrue(checkText, "Fail to edit Employee Status");
         sleep(4);
     }
