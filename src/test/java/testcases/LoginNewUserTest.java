@@ -10,7 +10,7 @@ import pages.AdminPage;
 import pages.CommonPage;
 import pages.LoginPage;
 import pages.PIMPage;
-import utils.WebUI;
+import static utils.WebUI.*;
 
 import java.util.Hashtable;
 
@@ -31,8 +31,9 @@ public class LoginNewUserTest extends BaseTest {
     @Test(priority = 0)
     public void testLoginNewUser() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
-        WebUI.sleep(5);
+        waitForPageLoaded();
         adminPage.addNewUser();
+        waitForPageLoaded();
         dashboardPage = loginPage.logIn(ConstantData.NEW_USERNAME, ConstantData.NEW_PASSWORD);
     }
 

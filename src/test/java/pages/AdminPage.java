@@ -47,111 +47,105 @@ public class AdminPage extends CommonPage {
     By confirmPassword = By.xpath("(//input[@type='password'])[2]");
     By profilePicture = By.xpath("//img[@alt='profile picture']");
     By buttonLogout = By.xpath("//a[normalize-space()='Logout']");
+    By selectNameIcon = By.xpath("//span[@class='oxd-userdropdown-tab']");
 
 
     public void addJobTitle() {
         waitForPageLoaded();
         clickElement(sectionJob);
-        sleep(3);
+        ;
         clickElement(selectJobTitles);
-        sleep(5);
         clickElement(buttonAdd);
-        sleep(5);
+        waitForPageLoaded();
         setText(inputInfor, "Automation QA Engineer");
         setText(inputJobDescription, "Contact directly Mr.Wu for JD");
         setText(inputNote, "We will contact with suitable candidates");
         clickElement(buttonSave);
-        sleep(10);
+        waitForPageLoaded();
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Automation QA Engineer')]"));
         verifyTrue(checkText, "Fail to add Job Title");
-        sleep(5);
+        sleep(2);
     }
 
     public void addJobCategory() {
-        sleep(3);
+        waitForPageLoaded();
         clickElement(sectionJob);
-        sleep(3);
+        waitForPageLoaded();
         clickElement(selectJobCategories);
-        sleep(5);
+        waitForPageLoaded();
         clickElement(buttonAdd);
-        sleep(5);
+        waitForPageLoaded();
         setText(inputInfor, "HRBP");
         clickElement(buttonSave);
-        sleep(10);
+        waitForPageLoaded();
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'HRBP')]"));
         verifyTrue(checkText, "Fail to add Job Category");
-        sleep(5);
+        waitForPageLoaded();
     }
 
     public void addEmploymentStatus() {
-        sleep(3);
+        waitForPageLoaded();
         clickElement(sectionJob);
-        sleep(3);
+        ;
         clickElement(selectEmploymentStatus);
-        sleep(5);
+        // sleep(5);
         clickElement(buttonAdd);
-        sleep(5);
+        // sleep(5);
+        waitForPageLoaded();
         setText(inputInfor, "Full-Time Internship");
         clickElement(buttonSave);
-        sleep(10);
+        waitForPageLoaded();
+        //sleep(10);
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Full-Time Internship')]"));
         verifyTrue(checkText, "Fail to add Employee Status");
-        sleep(5);
+        waitForPageLoaded();
+        //sleep(5);
     }
 
     public void deleteEmployeeStatus() {
-        sleep(3);
+        waitForPageLoaded();
         clickElement(sectionJob);
-        sleep(3);
         clickElement(selectEmploymentStatus);
-        sleep(5);
+        ;
         clickElement(buttonDelete);
         sleep(1);
         clickElement(buttonYesDelete);
         sleep(1);
         waitForPageLoaded();
         assertTrue(DriverManager.getDriver().findElements(By.xpath("//div[contains(text(),'Part-Time Inrternship')]")).isEmpty());
-        sleep(6);
+        waitForPageLoaded();
 
-       /* String actualText = getElementText(messageSuccess);
-        sleep(0.5);
-        String expectedText = "Successfully Updated";
-        Assert.assertTrue(actualText.contains(expectedText));
-        Log.info("Verify equals: " + actualText + " and " + expectedText);
-       */
     }
 
     public void editEmployeeStatus() {
-        sleep(3);
         clickElement(sectionJob);
-        sleep(3);
         clickElement(selectEmploymentStatus);
-        sleep(5);
         clickElement(buttonEdit);
-        sleep(5);
+        waitForPageLoaded();
+        waitForElementVisible(inputInfor);
         WebElement toEdit = DriverManager.getDriver().findElement(inputInfor);
         toEdit.sendKeys(Keys.CONTROL + "a");
+        sleep(1);
         toEdit.sendKeys(Keys.DELETE);
+        sleep(1);
         toEdit.sendKeys("Staff");
+        sleep(1);
         clickElement(buttonSave);
-        sleep(7);
+        waitForPageLoaded();
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Staff')]"));
         verifyTrue(checkText, "Fail to edit Employee Status");
-        sleep(5);
+        sleep(4);
     }
 
     public void adddLocation() {
-        sleep(3);
         clickElement(sectionOrganization);
-        sleep(3);
         clickElement(selectLocation);
-        sleep(5);
         clickElement(buttonAdd);
-        sleep(5);
+        waitForPageLoaded();
         setText(inputName, "Infosys");
         setText(inputCity, "Bengaluru");
         clickElement(selectDrowdownList);
-        sleep(10);
+        waitForPageLoaded();
         WebElement toMoveDown = DriverManager.getDriver().findElement(selectDrowdownList);
         pressI();
         sleep(1);
@@ -159,45 +153,45 @@ public class AdminPage extends CommonPage {
         toMoveDown.sendKeys(Keys.ENTER);
         setText(inputPhone, "014578229");
         clickElement(buttonSave);
-        sleep(7);
+        waitForPageLoaded();
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Infosys')]"));
         verifyTrue(checkText, "Fail to add Location");
+        sleep(4);
     }
 
     public void addNewUser() {
+        waitForPageLoaded();
         clickElement(By.xpath("//span[normalize-space()='Admin']"));
-        sleep(5);
         clickElement(buttonAdd);
-        sleep(5);
+        waitForPageLoaded();
+        waitForElementVisible(selectNameIcon);
 
-        WebElement getAdminName = DriverManager.getDriver().findElement(By.xpath("//p[@class='oxd-userdropdown-name']"));
-        String adminName = getAdminName.getText();
+        String adminName = getElementText(selectNameIcon);
         System.out.println(adminName);
         setText(inputEmployeeName, adminName);
 
 
-      //  setText(inputEmployeeName, ConstantData.ADMIN_NAME);
-        sleep(5);
         WebElement selectEmployeeName = DriverManager.getDriver().findElement(inputEmployeeName);
         selectEmployeeName.sendKeys(Keys.ARROW_DOWN);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-        sleep(5);
+        sleep(2);
 
         WebElement selectStatus = DriverManager.getDriver().findElement(status);
         selectStatus.sendKeys(Keys.ARROW_DOWN);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-        sleep(5);
+        sleep(2);
         WebElement toSelectRole = DriverManager.getDriver().findElement(userRole);
         toSelectRole.sendKeys(Keys.ARROW_DOWN);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-        sleep(5);
+        sleep(2);
         setText(inputInfor, ConstantData.NEW_USERNAME);
         setText(inputPassword, ConstantData.NEW_PASSWORD);
         setText(confirmPassword, ConstantData.NEW_PASSWORD);
         clickElement(buttonSave);
-        sleep(8);
+        sleep(3);
         clickElement(profilePicture);
-        sleep(5);
+        waitForElementPresent(buttonLogout);
         clickElement(buttonLogout);
+        sleep(2);
     }
 }

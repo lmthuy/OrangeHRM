@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -20,8 +21,8 @@ import java.time.Duration;
 import java.util.List;
 
 public class WebUI {
-    private final static int Timeout = 0;
-    private final static double Step_Time = 1;
+    private final static int Timeout = 5;
+    private final static double Step_Time = 2;
     private final static int Page_Load_Timeout = 5;
 
     public static void sleep(double second) {
@@ -35,10 +36,29 @@ public class WebUI {
     public static void waitForPageLoaded() {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Page_Load_Timeout), Duration.ofMillis(500));
         JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+
+        // wait for Javascript to loaded
+        ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor) DriverManager.getDriver()).executeScript("return document.readyState").toString().equals("complete");
+
+        //Get JS is Ready
+        boolean jsReady = js.executeScript("return document.readyState").toString().equals("complete");
+
+        //Wait Javascript until it is Ready!
+        if (!jsReady) {
+            Log.info("Javascript in NOT Ready!");
+            //Wait for Javascript to load
+            try {
+                wait.until(jsLoad);
+            } catch (Throwable error) {
+                error.printStackTrace();
+                Assert.fail("Timeout waiting for page load (Javascript). (" + Page_Load_Timeout + "s)");
+            }
+        }
     }
 
     @Step("Open URL: {0}")
     public static void openURL(String url) {
+        waitForPageLoaded();
         DriverManager.getDriver().get(url);
         sleep(Step_Time);
         Log.info("Open: " + url);

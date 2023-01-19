@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 import pages.AdminPage;
 import pages.CommonPage;
 import pages.LoginPage;
-import utils.WebUI;
+
+import static utils.WebUI.*;
 
 public class AdminTest extends BaseTest {
     public LoginPage loginPage;
@@ -25,25 +26,24 @@ public class AdminTest extends BaseTest {
     public void testAddJobTitle() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         adminPage = commonPage.openAdminPage();
-        WebUI.sleep(10);
+        waitForPageLoaded();
         adminPage.addJobTitle();
-        WebUI.waitForPageLoaded();
     }
 
     @Test(priority = 1)
     public void testAddJobCategory() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         adminPage = commonPage.openAdminPage();
-        WebUI.sleep(10);
+        waitForPageLoaded();
         adminPage.addJobCategory();
-        WebUI.waitForPageLoaded();
     }
 
     @Test(priority = 2)
     public void testAddEmployeeStatus() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         adminPage = commonPage.openAdminPage();
-        WebUI.sleep(5);
+        waitForPageLoaded();
+
         //Add Employee Status
         adminPage.addEmploymentStatus();
     }
@@ -52,23 +52,24 @@ public class AdminTest extends BaseTest {
     public void testDeleteEmployeeStatus() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         adminPage = commonPage.openAdminPage();
-        WebUI.sleep(5);
         //Delete Employee Status
         adminPage.deleteEmployeeStatus();
     }
+
     @Test(priority = 4)
-    public void testEditEmployeeStatus(){
+    public void testEditEmployeeStatus() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         adminPage = commonPage.openAdminPage();
-        WebUI.sleep(5);
+        waitForPageLoaded();
         //Edit Employee Status
         adminPage.editEmployeeStatus();
     }
+
     @Test(priority = 5)
-    public void testAddLocation(){
+    public void testAddLocation() {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         adminPage = commonPage.openAdminPage();
-        WebUI.sleep(5);
+        waitForPageLoaded();
         adminPage.adddLocation();
     }
 }

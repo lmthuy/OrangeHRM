@@ -33,7 +33,7 @@ public class PIMPage extends CommonPage {
     By checkFirstName = By.xpath("(//div[contains(text(),'Nguyen')])[1]");
     By checkJobTitle = By.xpath("(//div[contains(text(),'QA Engineer')])[1]");
     By editJob = By.xpath("//a[normalize-space()='Job']");
-    By inputJoinedDate = By.xpath("//input[@placeholder='yyyy-mm-dd']");
+    By inputJoinedDate = By.xpath("//input[@placeholder='dd-mm-yyyy']");
     By inputJobTitle = By.xpath("(//div[contains(text(),'-- Select --')])[1]");
     By inputJobCategory = By.xpath("(//div[contains(text(),'-- Select --')])[2]");
     By inputSubUnit = By.xpath("(//div[contains(text(),'-- Select --')])[3]");
@@ -45,11 +45,11 @@ public class PIMPage extends CommonPage {
     By jobTitle = By.xpath("(//div[contains(text(),'QA Engineer')])[1]");
 
     By sortID = By.xpath("(//div[@role='columnheader'])[2]/child::div[1]");
+    By selectDate = By.xpath("//i[@class='oxd-icon bi-calendar oxd-date-input-icon']");
     By selectDecending = By.xpath("(//span[@class='oxd-text oxd-text--span'][normalize-space()='Decending'])[1]");
 
     public void addEmployee() {
         clickElement(buttonAddEmployee);
-        sleep(5);
         setText(inputFirstName, ConstantData.FIRSTNAME);
         setText(inputLastName, ConstantData.LASTNAME);
         WebElement toEdit = DriverManager.getDriver().findElement(inputEmployeeID);
@@ -57,43 +57,40 @@ public class PIMPage extends CommonPage {
         toEdit.sendKeys(Keys.DELETE);
         toEdit.sendKeys(ConstantData.ID);
         clickElement(buttonSave);
-        sleep(7);
+       waitForPageLoaded();
         //Personal Details
         clickElement(inputJobTitle);
-        sleep(3);
+        sleep(2);
 
-        setText(inputLicenseExpiryDate, "2025-10-10");
-        setText(inputSSNNumber, "023647863");
-        setText(inputSinNumber, "03648711");
-        clickElement(nationality);
-        sleep(7);
         WebElement toSelectNationality = DriverManager.getDriver().findElement(nationality);
         pressV();
         sleep(2);
         toSelectNationality.sendKeys(Keys.ARROW_DOWN);
         toSelectNationality.sendKeys(Keys.ENTER);
 
+        setText(inputSSNNumber, "023647863");
+        setText(inputSinNumber, "03648711");
+
+
+
         clickElement(martialStatus);
-        sleep(2);
+        waitForPageLoaded();
         pressM();
-        setText(inputDateOfBirth, "1989-10-10");
+        pressENTER();
         clickElement(selectGender);
         clickElement(By.xpath("(//button[@type='submit'][normalize-space()='Save'])[1]"));
 
         //Job
 
         clickElement(editJob);
-        sleep(5);
+        waitForPageLoaded();
         setText(inputJoinedDate, "2022-12-08");
 
         waitForPageLoaded();
         clickElement(inputJobCategory);
         pressT();
-        sleep(2);
         clickElement(By.xpath("(//i)[9]"));
-        sleep(2);
         pressE();
-        sleep(3);
 
         waitForPageLoaded();
 
@@ -109,28 +106,24 @@ public class PIMPage extends CommonPage {
 
         clickElement(By.xpath("(//i)[11]"));
         pressP();
-        sleep(5);
+        waitForPageLoaded();
         pressENTER();
         clickElement(buttonSave);
 
         openURL("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
-        sleep(6);
+        waitForPageLoaded();
 
         clickElement(sortID);
-        sleep(2);
         clickElement(selectDecending);
-        sleep(2);
 
         boolean verifyJobTitle = checkElementExist(jobTitle);
-        verifyTrue(verifyJobTitle,"Fail to add new employee");
+        verifyTrue(verifyJobTitle, "Fail to add new employee");
         sleep(2);
         boolean verifyFirstName = checkElementExist(checkFirstName);
         verifyTrue(verifyFirstName, "Fail to add new employee");
-        sleep(3);
+        sleep(2);
         boolean verifyLastName = checkElementExist(checkLastName);
         verifyTrue(verifyLastName, "Fail to add new employee");
-
-
 
 
     }

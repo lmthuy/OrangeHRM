@@ -25,7 +25,7 @@ public class PIMTest extends BaseTest {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         waitForPageLoaded();
         pimPage = commonPage.openPIMPage();
-        sleep(5);
+        waitForPageLoaded();
         pimPage.addEmployee();
     }
 }

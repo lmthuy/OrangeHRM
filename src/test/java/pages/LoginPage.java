@@ -22,35 +22,33 @@ public class LoginPage {
 
     public DashboardPage logIn(String username, String password) {
         openURL(ConstantData.URL);
-        sleep(3);
+        waitForPageLoaded();
         setText(inputUsername, username);
         setText(inputPassword, password);
         clickElement(buttonSubmit);
-        sleep(6);
+        waitForPageLoaded();
         verifyEquals(getElementText(header_Dashboard), "Dashboard");
         return new DashboardPage();
     }
 
     public LoginPage forgetPassWord(String username) {
         openURL(ConstantData.URL);
-        sleep(5);
+        waitForPageLoaded();
         clickElement(forgetPassword);
-        sleep(4);
         setText(inputUsername, username);
         clickElement(buttonSubmit);
-        sleep(3);
         verifyEquals(getElementText(notifyLoginSuccess), "Reset Password link sent successfully");
-        sleep(10);
+        waitForPageLoaded();
         return new LoginPage();
     }
 
     public LoginPage logInWithInvalidInfor(String username, String password) {
         openURL(ConstantData.URL);
-        sleep(5);
+        waitForPageLoaded();
         setText(inputUsername, username);
         setText(inputPassword, password);
         clickElement(buttonSubmit);
-        sleep(7);
+        waitForPageLoaded();
         verifyEquals(getElementText(notifyLoginFail), "Invalid credentials");
         return new LoginPage();
     }
