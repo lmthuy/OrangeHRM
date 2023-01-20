@@ -45,6 +45,7 @@ public class AdminPage extends CommonPage {
     By status = By.xpath("(//div[contains(text(),'-- Select --')])[2]");
     By inputPassword = By.xpath("(//input[@type='password'])[1]");
     By confirmPassword = By.xpath("(//input[@type='password'])[2]");
+    By firstRow =By.xpath("//div[@class='oxd-table-header']//div[@role='row']");
     By profilePicture = By.xpath("//img[@alt='profile picture']");
     By buttonLogout = By.xpath("//a[normalize-space()='Logout']");
     By selectNameIcon = By.xpath("//span[@class='oxd-userdropdown-tab']");
@@ -53,7 +54,6 @@ public class AdminPage extends CommonPage {
     public void addJobTitle() {
         waitForPageLoaded();
         clickElement(sectionJob);
-        ;
         clickElement(selectJobTitles);
         clickElement(buttonAdd);
         waitForPageLoaded();
@@ -80,39 +80,34 @@ public class AdminPage extends CommonPage {
         waitForPageLoaded();
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'HRBP')]"));
         verifyTrue(checkText, "Fail to add Job Category");
-        waitForPageLoaded();
+        sleep(3);
     }
 
     public void addEmploymentStatus() {
         waitForPageLoaded();
         clickElement(sectionJob);
         clickElement(selectEmploymentStatus);
-      
         clickElement(buttonAdd);
-      
         waitForPageLoaded();
         setText(inputInfor, "Full-Time Internship");
         clickElement(buttonSave);
         waitForPageLoaded();
-     
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Full-Time Internship')]"));
         verifyTrue(checkText, "Fail to add Employee Status");
-        waitForPageLoaded();
-       
+        sleep(3);
     }
 
     public void deleteEmployeeStatus() {
         waitForPageLoaded();
         clickElement(sectionJob);
         clickElement(selectEmploymentStatus);
-        
         clickElement(buttonDelete);
         sleep(1);
         clickElement(buttonYesDelete);
         sleep(1);
         waitForPageLoaded();
         assertTrue(DriverManager.getDriver().findElements(By.xpath("//div[contains(text(),'Part-Time Inrternship')]")).isEmpty());
-        waitForPageLoaded();
+        sleep(3);
 
     }
 
@@ -123,13 +118,13 @@ public class AdminPage extends CommonPage {
         waitForPageLoaded();
         waitForElementVisible(inputInfor);
 
-        setText(inputInfor, " managed by Mr.Wu");
+       setText(inputInfor, " managed by Mr.Wu");
         sleep(2);
         clickElement(buttonSave);
         waitForPageLoaded();
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Mr.Wu')]"));
         verifyTrue(checkText, "Fail to edit Employee Status");
-        sleep(4);
+        sleep(3);
     }
 
     public void adddLocation() {
@@ -158,7 +153,6 @@ public class AdminPage extends CommonPage {
         waitForPageLoaded();
         clickElement(By.xpath("//span[normalize-space()='Admin']"));
         clickElement(buttonAdd);
-        waitForPageLoaded();
         waitForElementVisible(selectNameIcon);
 
         String adminName = getElementText(selectNameIcon);
@@ -167,26 +161,27 @@ public class AdminPage extends CommonPage {
 
 
         WebElement selectEmployeeName = DriverManager.getDriver().findElement(inputEmployeeName);
-        selectEmployeeName.sendKeys(Keys.ARROW_DOWN);
+        setArrowDown(selectEmployeeName);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-        sleep(2);
 
         WebElement selectStatus = DriverManager.getDriver().findElement(status);
-        selectStatus.sendKeys(Keys.ARROW_DOWN);
+        setArrowDown(selectStatus);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-        sleep(2);
+
+
         WebElement toSelectRole = DriverManager.getDriver().findElement(userRole);
-        toSelectRole.sendKeys(Keys.ARROW_DOWN);
+        setArrowDown(toSelectRole);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-        sleep(2);
+
+
         setText(inputInfor, ConstantData.NEW_USERNAME);
         setText(inputPassword, ConstantData.NEW_PASSWORD);
         setText(confirmPassword, ConstantData.NEW_PASSWORD);
         clickElement(buttonSave);
-        sleep(3);
+        sleep(4);
         clickElement(profilePicture);
-        waitForElementPresent(buttonLogout);
+        waitForElementVisible(buttonLogout);
         clickElement(buttonLogout);
-        sleep(2);
+        sleep(1);
     }
 }

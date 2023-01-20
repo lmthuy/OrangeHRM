@@ -33,7 +33,6 @@ public class LoginNewUserTest extends BaseTest {
         dashboardPage = loginPage.logIn(ConstantData.USERNAME, ConstantData.PASSWORD);
         waitForPageLoaded();
         adminPage.addNewUser();
-        waitForPageLoaded();
         dashboardPage = loginPage.logIn(ConstantData.NEW_USERNAME, ConstantData.NEW_PASSWORD);
     }
 

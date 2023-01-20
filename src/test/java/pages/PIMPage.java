@@ -52,12 +52,8 @@ public class PIMPage extends CommonPage {
         clickElement(buttonAddEmployee);
         setText(inputFirstName, ConstantData.FIRSTNAME);
         setText(inputLastName, ConstantData.LASTNAME);
-        WebElement toEdit = DriverManager.getDriver().findElement(inputEmployeeID);
-        toEdit.sendKeys(Keys.CONTROL + "a");
-        toEdit.sendKeys(Keys.DELETE);
-        toEdit.sendKeys(ConstantData.ID);
         clickElement(buttonSave);
-       waitForPageLoaded();
+        waitForPageLoaded();
         //Personal Details
         clickElement(inputJobTitle);
         sleep(2);
@@ -65,12 +61,11 @@ public class PIMPage extends CommonPage {
         WebElement toSelectNationality = DriverManager.getDriver().findElement(nationality);
         pressV();
         sleep(2);
-        toSelectNationality.sendKeys(Keys.ARROW_DOWN);
-        toSelectNationality.sendKeys(Keys.ENTER);
+        setArrowDown(toSelectNationality);
+        setEnter(toSelectNationality);
 
         setText(inputSSNNumber, "023647863");
         setText(inputSinNumber, "03648711");
-
 
 
         clickElement(martialStatus);
@@ -84,15 +79,14 @@ public class PIMPage extends CommonPage {
 
         clickElement(editJob);
         waitForPageLoaded();
-        setText(inputJoinedDate, "2022-12-08");
 
-        waitForPageLoaded();
+        waitForElementVisible(inputJobCategory);
         clickElement(inputJobCategory);
         pressT();
         clickElement(By.xpath("(//i)[9]"));
         pressE();
 
-        waitForPageLoaded();
+        waitForElementVisible(By.xpath("(//i)[10]"));
 
         clickElement(By.xpath("(//i)[10]"));
         sleep(2);
@@ -118,10 +112,10 @@ public class PIMPage extends CommonPage {
 
         boolean verifyJobTitle = checkElementExist(jobTitle);
         verifyTrue(verifyJobTitle, "Fail to add new employee");
-        sleep(2);
+        sleep(1);
         boolean verifyFirstName = checkElementExist(checkFirstName);
         verifyTrue(verifyFirstName, "Fail to add new employee");
-        sleep(2);
+        sleep(1);
         boolean verifyLastName = checkElementExist(checkLastName);
         verifyTrue(verifyLastName, "Fail to add new employee");
 

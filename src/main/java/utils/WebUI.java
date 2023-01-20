@@ -5,6 +5,7 @@ import driver.DriverManager;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -268,6 +269,15 @@ public class WebUI {
         JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript("arguments[0].scrollIntoView(fail);", getWebElement(element));
     }
+    public static void setArrowDown (WebElement element) {
+        waitForPageLoaded();
+        sleep(Step_Time);
+        element.sendKeys(Keys.ARROW_DOWN);
+    }
+    public static void setEnter (WebElement element) {
+        waitForPageLoaded();
+        sleep(Step_Time);
+        element.sendKeys(Keys.ENTER);
 
-
+    }
 }

@@ -47,13 +47,13 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        //System.out.println(result.getName() + " is fail.");
         CaptureHelper.takeScreenshot(result); //Chụp màn hình khi Fail
         Log.error(result.getName() + " is fail.");
 
         //Extent Report
         ExtentTestManager.addScreenShot(result.getName());
         ExtentTestManager.logMessage(Status.FAIL, result.getName() + " is failed.");
+        ExtentTestManager.logMessage(Status.FAIL, result.getThrowable().toString());
 
         //Allure Report
         AllureManager.saveTextLog(result.getName() + " is fail.");
