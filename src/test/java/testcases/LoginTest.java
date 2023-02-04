@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void testLogin() {
         dashboardPage =  loginPage.logIn(ConstantData.USERNAME,ConstantData.PASSWORD);
-        sleep(5);
+
     }
 }
 

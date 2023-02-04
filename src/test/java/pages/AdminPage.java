@@ -17,6 +17,7 @@ import static utils.WebUI.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.security.Key;
+import java.util.UUID;
 
 public class AdminPage extends CommonPage {
     By buttonAdd = By.xpath("//button[normalize-space()='Add']");
@@ -45,7 +46,7 @@ public class AdminPage extends CommonPage {
     By status = By.xpath("(//div[contains(text(),'-- Select --')])[2]");
     By inputPassword = By.xpath("(//input[@type='password'])[1]");
     By confirmPassword = By.xpath("(//input[@type='password'])[2]");
-    By firstRow =By.xpath("//div[@class='oxd-table-header']//div[@role='row']");
+    By firstRow = By.xpath("//div[@class='oxd-table-header']//div[@role='row']");
     By profilePicture = By.xpath("//img[@alt='profile picture']");
     By buttonLogout = By.xpath("//a[normalize-space()='Logout']");
     By selectNameIcon = By.xpath("//span[@class='oxd-userdropdown-tab']");
@@ -61,10 +62,10 @@ public class AdminPage extends CommonPage {
         setText(inputJobDescription, "Contact directly Mr.Wu for JD");
         setText(inputNote, "We will contact with suitable candidates");
         clickElement(buttonSave);
-        waitForPageLoaded();
+        waitForElementVisible(By.xpath("//div[contains(text(),'Automation QA Engineer')]"));
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Automation QA Engineer')]"));
         verifyTrue(checkText, "Fail to add Job Title");
-        sleep(2);
+        sleep(3);
     }
 
     public void addJobCategory() {
@@ -77,7 +78,7 @@ public class AdminPage extends CommonPage {
         waitForPageLoaded();
         setText(inputInfor, "HRBP");
         clickElement(buttonSave);
-        waitForPageLoaded();
+        waitForElementVisible(By.xpath("//div[contains(text(),'HRBP')]"));
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'HRBP')]"));
         verifyTrue(checkText, "Fail to add Job Category");
         sleep(3);
@@ -118,7 +119,7 @@ public class AdminPage extends CommonPage {
         waitForPageLoaded();
         waitForElementVisible(inputInfor);
 
-       setText(inputInfor, " managed by Mr.Wu");
+        setText(inputInfor, " managed by Mr.Wu");
         sleep(2);
         clickElement(buttonSave);
         waitForPageLoaded();
@@ -138,15 +139,14 @@ public class AdminPage extends CommonPage {
         waitForPageLoaded();
         WebElement toMoveDown = DriverManager.getDriver().findElement(selectDrowdownList);
         pressI();
-        sleep(1);
-        toMoveDown.sendKeys(Keys.ARROW_DOWN);
-        toMoveDown.sendKeys(Keys.ENTER);
+        setArrowDown(toMoveDown);
+        setEnter(toMoveDown);
         setText(inputPhone, "014578229");
         clickElement(buttonSave);
-        waitForPageLoaded();
+        sleep(3);
         boolean checkText = checkElementExist(By.xpath("//div[contains(text(),'Infosys')]"));
         verifyTrue(checkText, "Fail to add Location");
-        sleep(4);
+
     }
 
     public void addNewUser() {
@@ -172,13 +172,11 @@ public class AdminPage extends CommonPage {
         WebElement toSelectRole = DriverManager.getDriver().findElement(userRole);
         setArrowDown(toSelectRole);
         clickElement(By.xpath("(//div[@role='listbox'])[1]"));
-
-
-        setText(inputInfor, ConstantData.NEW_USERNAME);
+        setText(inputInfor,ConstantData.NEW_USERNAME);
         setText(inputPassword, ConstantData.NEW_PASSWORD);
         setText(confirmPassword, ConstantData.NEW_PASSWORD);
         clickElement(buttonSave);
-        sleep(4);
+        waitForPageLoaded();
         clickElement(profilePicture);
         waitForElementVisible(buttonLogout);
         clickElement(buttonLogout);

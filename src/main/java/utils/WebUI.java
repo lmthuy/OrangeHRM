@@ -22,9 +22,9 @@ import java.time.Duration;
 import java.util.List;
 
 public class WebUI {
-    private final static int Timeout = 5;
-    private final static double Step_Time = 2;
-    private final static int Page_Load_Timeout = 5;
+    private final static int Timeout = 4;
+    private final static double Step_Time = 1;
+    private final static int Page_Load_Timeout =4;
 
     public static void sleep(double second) {
         try {
