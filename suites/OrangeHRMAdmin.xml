@@ -2,8 +2,8 @@
 
 <suite name="Project Orange HRM" verbose="1">
 
-    <test name="Login New User Test">
-        <parameter name="browser" value="edge"></parameter>
+    <test name="HR Admin Test">
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
             <class name="testcases.AdminTest"/>
         </classes>

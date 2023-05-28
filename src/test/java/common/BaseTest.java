@@ -1,5 +1,6 @@
 package common;
 
+import DataTest.ConstantData;
 import driver.DriverManager;
 import helpers.PropertiesHelpers;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -10,7 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -58,7 +61,11 @@ public class BaseTest extends CommonPage {
         WebDriver driver;
         System.out.println("Launching Chrome browser...");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         return driver;
     }
@@ -67,7 +74,11 @@ public class BaseTest extends CommonPage {
         WebDriver driver;
         System.out.println("Launching Edge browser...");
         WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
+
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("--remote-allow-origins=*");
+
+        driver = new EdgeDriver(options);
         driver.manage().window().maximize();
         return driver;
     }
@@ -76,7 +87,9 @@ public class BaseTest extends CommonPage {
         WebDriver driver;
         System.out.println("Launching Firefox browser...");
         WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
+
+        FirefoxOptions options = new FirefoxOptions();
+        driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
         return driver;
     }

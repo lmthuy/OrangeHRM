@@ -95,11 +95,6 @@ public class PIMPage extends CommonPage {
         pressQ();
         pressENTER();
 
-        clickElement(By.xpath("(//i)[11]"));
-        pressP();
-        waitForPageLoaded();
-        pressENTER();
-        clickElement(buttonSave);
 
         openURL("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
         waitForPageLoaded();
